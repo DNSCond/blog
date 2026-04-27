@@ -1,0 +1,19 @@
+article.blogpost {
+    padding-left: 0.5em;
+
+
+    > pre {
+        overflow-x: scroll;
+        margin-top: 1em;
+        white-space: pre-wrap;
+    }
+
+}
+
+article.blogpost.left-border {
+    border-left: 2px solid gray;
+}
+
+article.blogpost.sans > * {
+    font-family: sans-serif;
+}

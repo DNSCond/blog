@@ -1,0 +1,14 @@
+.accountbanner {
+    > div {
+        height: 3em;
+        background-color: white;
+        /*noinspection CssUnresolvedCustomProperty*/
+        border-bottom: 6px solid var(--primaryColor);
+
+        > div {
+            width: 88%;
+            margin: auto;
+
+        }
+    }
+}

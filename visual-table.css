@@ -1,0 +1,11 @@
+.login-form {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Label takes what it needs, input takes the rest */
+    gap: 0.5em 1em;
+    max-width: 300px;
+    margin: auto;
+}
+
+button {
+    grid-column: span 2; /* Makes button stretch across both columns */
+}

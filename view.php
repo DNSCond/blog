@@ -9,7 +9,7 @@ use function HashApi\sha512Base64;
 use ANTHeader\ANTNavOption;
 
 require_once "{$_SERVER['DOCUMENT_ROOT']}/blog/helpers.php";
-$stmt = ($pdo = getPDO())->prepare('SELECT * FROM antrequest.posts WHERE slug=:slug;');
+$stmt = ($pdo = getPDO())->prepare('SELECT * FROM posts WHERE slug=:slug;');
 $stmt->execute([':slug' => $GLOBALS['slug'] ?? $_GET['slug'] ?? '']);
 $result = $stmt->fetch();
 $user_opts = ['base' => '/blog/'];

@@ -14,8 +14,6 @@ function htmlEncodeMinimal(string $value): string
     return ($html);
 }
 
-// crypto.getRandomValues(new Uint8Array(43)).toBase64()
-
 function createSelectElement(string $name, array $options, null|string|callable|array $select = null): string
 {
     $name = htmlspecialchars12($name);

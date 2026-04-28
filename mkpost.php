@@ -24,7 +24,7 @@ $ctype = array_key_exists('ctype', $_POST) ? match ("{$_POST['ctype']}") {
 if (array_key_exists('sessid', $_COOKIE)) {
     $jsonwt = getJSONWT();
     if ($data = $jsonwt->validate("{$_COOKIE['sessid']}")) {
-        $links[] = new ANTNavLinkTag('stylesheet', 'accountbanner.css');
+        //$links[] = new ANTNavLinkTag('stylesheet', 'accountbanner.css');
         $verifiedAs = htmlEncodeMinimal("{$data['autoauthOf']}");
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_POST['action'] === 'post' && $tcExists) {
@@ -49,6 +49,7 @@ if (array_key_exists('sessid', $_COOKIE)) {
     }
 }
 
+$links[] = new ANTNavLinkTag('stylesheet', 'accountbanner.css');
 require_once 'dataDescriptionList.php';
 create_head2($htmlpageTitle = 'Make a post', array(), $links, [
         ANTNavFavicond('https://ANTRequest.nl', $htmlpageTitle),
@@ -58,7 +59,7 @@ create_head2($htmlpageTitle = 'Make a post', array(), $links, [
                 'bgcolor=%2300a8f3&fgcolor=%238cfffa&L=%23fff200&W=%23000000&LC=%23ff0000&RC=%230000ff&v=1',
                 'Hash Table', '#00a6a6', '#00ffff'),
 ]) ?>
-<div class=accountbanner><?= $verifiedAs ? "<div><div>$verifiedAs</div></div>" : '' ?></div>
+<div class=accountbanner><?= '<div><div>' . ($verifiedAs ? "Authorized as ANT//$verifiedAs" : 'You are Unauthorized to make posts. but you are allowed to write markdown and preview them') . '</div></div>' ?></div>
 <div class=divs>
     <h1>Make a Post</h1>
     <form method=post><h2>Make a Post</h2>

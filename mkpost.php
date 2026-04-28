@@ -28,7 +28,7 @@ if (array_key_exists('sessid', $_COOKIE)) {
         $verifiedAs = htmlEncodeMinimal("{$data['autoauthOf']}");
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_POST['action'] === 'post' && $tcExists) {
-                $stmt = $pdo->prepare('SELECT id FROM antrequest.accounts WHERE username=:username;');
+                $stmt = $pdo->prepare('SELECT id FROM antrequest.antAccounts WHERE username=:username;');
                 $stmt->execute([':username' => "{$data['autoauthOf']}"]);
                 if ($author = $stmt->fetch()) {
                     $stmt = $pdo->prepare('INSERT INTO antrequest.posts(author, text, created_at, texttype, slug, title)'

@@ -11,12 +11,12 @@ $pdo = getPDO();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (array_key_exists('username', $_POST) && is_string($_POST['username']) &&
             array_key_exists('password', $_POST) && is_string($_POST['password'])) {
-        $stmt = $pdo->prepare('SELECT id,password FROM antrequest.accounts WHERE username=:username;');
+        $stmt = $pdo->prepare('SELECT id,password FROM antrequest.antAccounts WHERE username=:username;');
         $stmt->execute([':username' => $_POST['username']]);
         if ($result = $stmt->fetch()) {
             if (password_verify("{$_POST['password']}", $result['password'])) {
                 $jsonwt = getJSONWT();
-                $stmt = $pdo->prepare('UPDATE antrequest.accounts SET automatedAuth=:automatedAuth WHERE id=:id');
+                $stmt = $pdo->prepare('UPDATE antrequest.antAccounts SET automatedAuth=:automatedAuth WHERE id=:id');
                 $automatedAuth = $jsonwt->generate(['autoauthOf' => $_POST['username']]);
                 $stmt->execute([':automatedAuth' => $automatedAuth,':id' => $result['id']]);
                 set_cookie('sessid', $automatedAuth, array('HttpOnly' => true, 'max-age' => 3600));

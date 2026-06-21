@@ -3,8 +3,6 @@ use function ANTHeader\ANTNavFavicond;
 use function ANTHeader\ANTNavReddcond;
 use function ANTHeader\create_head2;
 use function HashApi\sha256Base64;
-use function HashApi\sha384Base64;
-use function HashApi\sha512Base64;
 use ANTHeader\ANTNavLinkTag;
 use ANTHeader\ANTNavOption;
 use function Helpers\htmlspecialchars12;
@@ -82,19 +80,12 @@ create_head2($htmlpageTitle = 'Make a post', array(), $links, [
                 $sans = $ctype === 'markdown' ? 'sans' : 'mono';
                 echo "<article class=\"blogpost $sans left-border\">";
                 if ($ctype === 'markdown') {
-                    $parsedown = (new Parsedown)->setSafeMode(true);
-                    echo /*$html=*/
-                    $parsedown->text($rawText);
+                    require_once 'createParsedown.php';
+                    echo createParsedown()->text($rawText);
                 } elseif ($ctype === 'plaintext') {
                     echo "<pre class=pre-plaintext>" . htmlEncodeMinimal($rawText) . "</pre>";
                 }
-                echo '</article>' . dataDescriptionList([
-                                'Raw-Content-Length' => strlen($rawText),
-                                'sha256b64' => 'sha256b64-' . sha256Base64($tc),
-                                'sha384b64' => 'sha384b64-' . sha384Base64($tc),
-                                'sha512b64' => 'sha512b64-' . sha512Base64($tc),
-                        ]);
-                echo '<button type=submit name=action value=post>Submit</button>';
+                echo '</article><button type=submit name=action value=post>Submit</button>';
             } ?></div>
     </form>
 </div>

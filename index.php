@@ -16,7 +16,7 @@ create_head2($title = 'ANT\'s Blog', ['base' => '/blog/',
         'bgcolor=%2300a8f3&fgcolor=%238cfffa&L=%23fff200&W=%23000000&LC=%23ff0000&RC=%230000ff&v=1',
         'Hash Table', '#00a6a6', '#00ffff'),
 ]);
-echo "<div class=divs><h1>$title</h1><h2>Posts</h2>";
+echo "<div class=divs><h1>$title</h1><a href=rss.xml.php>RSS Feed</a><h2>Posts</h2>";
 
 $stmt = $pdo->prepare("SELECT slug,title,created_at,texttype FROM posts ORDER BY created_at DESC LIMIT :limit OFFSET :offset;");
 $stmt->execute([':limit' => 20, ':offset' => 0]);
